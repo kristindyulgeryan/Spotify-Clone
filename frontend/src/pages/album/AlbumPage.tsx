@@ -23,9 +23,9 @@ const AlbumPage = () => {
 
   return (
     <div className="h-full">
-      <ScrollArea className="h-full">
+      <ScrollArea className="h-full rounded-md">
         {/* Main content */}
-        <div className="relativ min-h-full">
+        <div className="relative min-h-full">
           {/* bg gradient */}
 
           <div
@@ -51,9 +51,9 @@ const AlbumPage = () => {
                   </span>
                   <span className="">
                     {" "}
-                    . {currentAlbum?.songs.length} songs
+                    • {currentAlbum?.songs.length} songs
                   </span>
-                  <span> . {currentAlbum?.releaseYear}</span>
+                  <span> • {currentAlbum?.releaseYear}</span>
                 </div>
               </div>
             </div>

@@ -61,7 +61,7 @@ const LeftSidebar = () => {
             <span className="hidden md:inline">Playlists</span>
           </div>
         </div>
-        <ScrollArea style={{ height: "calc(100vh - 300px)" }}>
+        <ScrollArea className="h-[calc(100vh-300px)]">
           <div className="space-y-2">
             {isLoading ? (
               <PlaylistSkeleton />
@@ -70,7 +70,7 @@ const LeftSidebar = () => {
                 <Link
                   to={`/albums/${album._id}`}
                   key={album._id}
-                  className="p-2 hover:bg-zinc-800 rounded-md flex items-center gap-3 cursor-pointer"
+                  className="p-2 hover:bg-zinc-800 rounded-md flex items-center gap-3 group cursor-pointer"
                 >
                   <img
                     src={album.imageUrl}
