@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/lib/axios";
+import { axiosInstance } from "@/lib/axios.js";
 import { create } from "zustand";
 
 interface ChatStore {
@@ -17,6 +17,7 @@ export const useChatStore = create<ChatStore>((set) => ({
 
     try {
       const response = await axiosInstance.get("/users");
+      console.log("Fetched users:", response.data);
       set({ users: response.data });
     } catch (error: any) {
       set({ error: error.response.data.message });
