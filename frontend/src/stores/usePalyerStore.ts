@@ -15,7 +15,7 @@ interface PlayerStore {
   playPrevious: () => void;
 }
 
-export const usePlayer = create<PlayerStore>((set, get) => ({
+export const usePlayerStore = create<PlayerStore>((set, get) => ({
   currentSong: null,
   isPlaying: false,
   queue: [],
