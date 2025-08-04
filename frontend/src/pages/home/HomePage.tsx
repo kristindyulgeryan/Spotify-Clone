@@ -1,7 +1,7 @@
 import Topbar from "@/components/Topbar.tsx";
 import { useMusicStore } from "@/stores/useMusicStore.ts";
 import { useEffect } from "react";
-import FeaturedSection from "./components/featuredSection";
+import FeaturedSection from "./components/FeaturedSection.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import SectionGrid from "./components/SectionGrid.tsx";
 
@@ -33,18 +33,19 @@ const HomePage = () => {
             Good afternoon
           </h1>
           <FeaturedSection />
-        </div>
-        <div className="space-y-8">
-          <SectionGrid
-            title="Made For You"
-            songs={madeForYouSongs}
-            isLoading={isLoading}
-          />
-          <SectionGrid
-            title="Trending"
-            songs={trendingSongs}
-            isLoading={isLoading}
-          />
+
+          <div className="space-y-8">
+            <SectionGrid
+              title="Made For You"
+              songs={madeForYouSongs}
+              isLoading={isLoading}
+            />
+            <SectionGrid
+              title="Trending"
+              songs={trendingSongs}
+              isLoading={isLoading}
+            />
+          </div>
         </div>
       </ScrollArea>
     </main>
