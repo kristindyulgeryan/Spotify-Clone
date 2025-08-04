@@ -6,6 +6,7 @@ import {
 import { Outlet } from "react-router-dom";
 import LeftSidebar from "./components/LeftSidebar.tsx";
 import FriendsActivity from "./components/FriendsActivity.tsx";
+import AudioPlayer from "./components/AudioPlayer.tsx";
 
 const MainLayout = () => {
   const isMobile = false;
@@ -15,6 +16,7 @@ const MainLayout = () => {
         direction="horizontal"
         className="flex-1 flex h-full overflow-hidden p-2"
       >
+        <AudioPlayer />
         {/* Left sidebar */}
 
         <ResizablePanel
