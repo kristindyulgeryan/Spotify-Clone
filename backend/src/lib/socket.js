@@ -1,5 +1,4 @@
 import { Server } from "socket.io";
-import { Message } from "../models/message.model.js";
 
 export const initializeSocket = (server) => {
   const io = new Server(server, {
@@ -47,6 +46,22 @@ export const initializeSocket = (server) => {
       } catch (error) {
         console.log("Message error", error);
         socket.emit("message_error", error.message);
+      }
+    });
+
+    socket.on("disconnect", () => {
+      let disconnectUserId;
+      for (const [userId, socketId] of userSockets.entries()) {
+        // find disconnected user
+        if (socketId === socket.id) {
+          disconnectUserId = userId;
+          userSockets.delete(userId);
+          userActivities.delete(userId);
+          break;
+        }
+      }
+      if (disconnectUserId) {
+        io.emit("user_disconnected", disconnectUserId);
       }
     });
   });
