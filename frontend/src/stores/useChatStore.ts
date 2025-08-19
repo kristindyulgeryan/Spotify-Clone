@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/lib/axios.js";
-import type { Message } from "@/types";
+import type { Message, User } from "@/types";
+
 import { io } from "socket.io-client";
 import { create } from "zustand";
 
@@ -12,10 +13,14 @@ interface ChatStore {
   onlineUsers: Set<string>;
   userActivities: Map<string, string>;
   messages: Message[];
+  selectedUser: User | null;
+
   fetchUsers: () => Promise<void>;
   initSocket: (userId: string) => void;
   disconnectSocket: () => void;
   sendMessage: (receiverId: string, senderId: string, content: string) => void;
+  fetchMessages: (userId: string) => Promise<void>;
+  setSelectedUser: (user: User | null) => void;
 }
 
 const baseURL = "http://localhost:5000";
@@ -34,7 +39,9 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   onlineUsers: new Set(),
   userActivities: new Map(),
   messages: [],
+  selectedUser: null,
 
+  setSelectedUser: (user) => ({ selectedUser: user }),
   fetchUsers: async () => {
     set({ isLoading: true, error: null });
 
@@ -49,7 +56,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     }
   },
 
-  initSocket: (userId: string) => {
+  initSocket: (userId) => {
     if (!get().isConnected) socket.connect();
     socket.auth = { userId };
     socket.emit("user_connected", userId);
@@ -105,5 +112,22 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       set({ isConnected: false });
     }
   },
-  sendMessage: async () => {},
+  sendMessage: async (receiverId, senderId, content) => {
+    const socket = get().socket;
+    if (!socket) return;
+
+    socket.emmit("send_message", { receiverId, senderId, content });
+  },
+
+  fetchMessages: async (userId: string) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await axiosInstance.get(`/users/messages/${userId}`);
+      set({ messages: response.data });
+    } catch (error: any) {
+      set({ error: error.response.data.message });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));
