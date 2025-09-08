@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import { Message } from "../models/message.model.js";
 
 export const initializeSocket = (server) => {
   const io = new Server(server, {
@@ -12,7 +13,7 @@ export const initializeSocket = (server) => {
   const userActivities = new Map(); // {userId: activity}
 
   io.on("connection", (socket) => {
-    socket.on("user_connected", () => {
+    socket.on("user_connected", (userId) => {
       userSockets.set(userId, socket.id);
       userActivities.set(userId, "Idle");
 
@@ -34,7 +35,7 @@ export const initializeSocket = (server) => {
       try {
         const { senderId, receiverId, content } = data;
 
-        const message = await message.create({ senderId, receiverId, content });
+        const message = await Message.create({ senderId, receiverId, content });
 
         // send to receiver in  realtime, if  they' re online
         const receiverSocketId = userSockets.get(receiverId);
