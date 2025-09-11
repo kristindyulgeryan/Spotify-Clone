@@ -6,11 +6,13 @@ import { useChatStore } from "@/stores/useChatStore.ts";
 const UsersList = () => {
   const { users, selectedUser, isLoading, setSelectedUser, onlineUsers } =
     useChatStore();
+
+  console.log("Selected:", selectedUser?.fullName);
   return (
     <div className="border-r border-zinc-800">
       <div className="flex flex-col h-full">
         <ScrollArea className="h-[calc(100vh-280px)]">
-          <div className="spac-y-2 p-4">
+          <div className="space-y-2 p-4">
             {isLoading ? (
               <UsersListSkeleton />
             ) : (
