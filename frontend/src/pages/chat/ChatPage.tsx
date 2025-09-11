@@ -6,6 +6,15 @@ import Topbar from "@/components/Topbar";
 import ChatHeader from "./components/ChatHeader.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import { Avatar, AvatarImage } from "@/components/ui/avatar.tsx";
+import MessageInput from "./components/MessageInput.tsx";
+
+const formatTime = (data: string) => {
+  return new Date(data).toLocaleTimeString("bg-BG", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+};
 
 const ChatPage = () => {
   const { user } = useUser();
@@ -60,13 +69,14 @@ const ChatPage = () => {
                       >
                         <p className="text-sm">{message.content}</p>
                         <span className="text-xs text-zinc-300 mt-1 block">
-                          {message.createdAt}
+                          {formatTime(message.createdAt)}
                         </span>
                       </div>
                     </div>
                   ))}
                 </div>
               </ScrollArea>
+              <MessageInput />
             </>
           ) : (
             <NoConversationPlaceholder />
