@@ -12,3 +12,6 @@ yarn-error.log*
 
 # VS Code settings (optional)
 .vscode/
+
+# environment variables file
+.env
