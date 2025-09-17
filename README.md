@@ -46,13 +46,14 @@ A full-stack **Spotify-style music streaming app** with real-time chat, online m
 ---
 
 ## 📸 Screenshots
+
 ### 🏠 Home Page
-![Home Page](assets/home.png)
-![Chat](assets/chat.png)
-![Admin Dashboard](assets/admin-dashboard.png)
+<img src="assets/home.png" width="500" />
+<img src="assets/chat.png" width="500" />
+<img src="assets/admin-dashboard.png" width="500" />
 
 ### 📀 Add New Album (Admin Panel)
-![Add Album](assets/add-album.png)
+<img src="assets/add-album.png" width="500" />
 
 ### ➕ Add New Song (Admin Panel)
-![Add Song](assets/add-song.png)
+<img src="assets/add-song.png" width="500" />
